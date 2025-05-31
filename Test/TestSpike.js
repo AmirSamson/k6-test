@@ -22,7 +22,6 @@ export const options = {
 };
 
 export default function () {
-  const BASE_URL = "https://services.rivalarium.com/api/v1/user_info/service/get"; // make sure this is not production
+  const BASE_URL = "https://services.rivalarium.com/api/v1/user_info/service/get"; 
   sleep(2);
-
-}
+};
