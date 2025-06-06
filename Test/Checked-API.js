@@ -5,8 +5,8 @@ export let options = {
   vus: 20,
   duration: '1m',
   thresholds: {
-    http_req_duration: ['p(95)<500'], // 95% of requests should be < 500ms
-    'checks': ['rate>0.95'],         // at least 95% of checks should pass
+    http_req_duration: ['p(95)<500'], 
+    'checks': ['rate>0.95'],         
   },
 };
 
