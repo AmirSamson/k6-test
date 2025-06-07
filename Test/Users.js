@@ -1,35 +1,35 @@
 import http from 'k6/http';
-import {SharedArray}  from 'k6/data';
 import { check, sleep } from 'k6';
+import { SharedArray } from 'k6/data';
 
-/**
- * this test is for using a shared Array and reading and opening a JSON file of users
- * in order to use them for request on a website. 
- */
-const users = new SharedArray('user data', function(){
-    return JSON.parse(open('./users.json'));
+const users = new SharedArray('user data', function () {
+  return JSON.parse(open('./users.json'));
 });
 
 export let options = {
-    vus: 10,
-    duration: '7s',
-}
+  vus: 1,
+  iterations: 1,
+};
 
 export default function () {
-  const user = users[Math.floor(Math.random() * users.length)];
+  const user = users[0]; // only one user
 
-  const res = http.post('https://dummyjson.com/auth/login', JSON.stringify({
+  const payload = JSON.stringify({
     username: user.username,
     password: user.password,
-  }), {
+  });
+
+  const res = http.post('https://dummyjson.com/auth/login', payload, {
     headers: { 'Content-Type': 'application/json' },
   });
 
+  console.log(`Status: ${res.status}`);
+  console.log(`Body: ${res.body}`);
+
   check(res, {
     'status is 200': (r) => r.status === 200,
-    'received token': (r) => r.json('token') !== undefined,
+    'token received': (r) => r.json('token') !== undefined,
   });
-  console.log(`Token received: ${res.json('token')}`);
 
   sleep(1);
 }
