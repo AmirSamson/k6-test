@@ -8,11 +8,11 @@ const users = new SharedArray('user data', function () {
 
 export let options = {
   vus: 1,
-  iterations: 1,
+  iterations: 1, 
 };
 
 export default function () {
-  const user = users[0]; // only one user
+  const user = users[Math.floor(Math.random() * users.length)];
 
   const payload = JSON.stringify({
     username: user.username,
