@@ -7,8 +7,8 @@ const users = new SharedArray('user data', function () {
 });
 
 export let options = {
-  vus: 1,
-  iterations: 1, 
+  vus: 10,
+  duration: '1s', 
 };
 
 export default function () {
