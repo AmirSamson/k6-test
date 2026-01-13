@@ -22,8 +22,4 @@ export default function(){
         'This page is start page': (r) => r.body.includes('Collection of simple web-pages suitable for load testing.')
             // now this will check the K6.io page for this text.
     })
-
-    check(res, {
-        
-    }) 
 }

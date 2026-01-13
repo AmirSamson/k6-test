@@ -8,7 +8,7 @@ export let options={
 
 export default function(){
     http.get('https://test.k6.io');
-    sleep(1);
+    sleep(1); // 
     http.get('https://test.k6.io/contacts.php')
     sleep(2)
     http.get('https://test.k6.io/news.php')
