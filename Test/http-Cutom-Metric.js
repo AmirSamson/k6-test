@@ -1,8 +1,9 @@
 import http from 'k6/http';
 import { check } from 'k6';
-import { Trend } from 'k6/metrics';
+import { Counter, Trend } from 'k6/metrics';
 
 let loginDuration = new Trend('login_duration');
+let myCounter = new Counter('my_Counter')
 
 export let options = {
   vus: 20,
@@ -10,6 +11,8 @@ export let options = {
   thresholds: {
     login_duration: ['p(95)<300'], 
     checks: ['rate>0.98'],
+    loginDuration: ['max<400'],
+    myCounter: ['count>10']
   },
 };
 
@@ -22,6 +25,7 @@ export default function () {
   });
 
   loginDuration.add(res.timings.duration);
+  myCounter.add(1)
 
   check(res, {
     'logged in': (r) => r.status === 200,
