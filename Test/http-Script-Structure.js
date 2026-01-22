@@ -1,5 +1,4 @@
 import { sleep } from 'k6';
-import http from 'k6/http';
 
 /*README:
 in K6 there are 4 stages in each test.
