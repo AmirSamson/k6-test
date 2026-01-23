@@ -2,7 +2,13 @@ import http from 'k6/http';
 import {check} from 'k6';
 
 /*in this file we are using 'json()' as a parser for JSON files from API responses.
-this method will enable us to parse a JSON and use it in order to check for certain stuff inside the API response.*/
+this method will enable us to parse a JSON and use it in order to check for certain stuff inside the API response.
+
+Also when we don't know the response of a URL we can use the following flag in the Terminal to access the response: 
+
+    > K6 run --http-debug="full" {name of the test file}
+
+*/
 
 export default function(){
     let res = http.get('https://test-api.k6.io/public/crocodiles')
