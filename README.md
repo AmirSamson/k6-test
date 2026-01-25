@@ -1,4 +1,4 @@
-# k6-learn
+# k6-test (JS)
 this repository is for tests that I have wrote in JavaScript format, using k6.
 Read the followings for clues on the Methods and functions used in this Repo:
 
