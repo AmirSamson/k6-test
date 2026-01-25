@@ -10,12 +10,25 @@ sleep(1) ==> this means that each request/iteration will wait for 1 second, afte
 ------
 
 ### Tags:
-Tags are really useful when it comes to distinguishing the results from each other. i.e. thresholds can be tagged so that we see different results for each:
+Tags are really useful when it comes to distinguishing the results from each other.
+
+The only way we can add tags in Thresholds is to put them in between single Quotes:
+```
+'http_request_duration{status:200}': ['p(95)<1000']
+```
+
+so that there is no JavaScript syntax error.
+i.e. thresholds can be tagged so that we see different results for each:
+
 ```
     thresholds:{
         http_request_duration: ['p(95)<1000'],
-        'http_request_duration{status:200}': ['p(95)<1000'], // the {status:200} is a tag to that address which returns a 200. 
-        'http_request_duration{status:201}': ['p(95)<1000'] // the {status:200} is a tag to that address which returns a 201. 
+
+        'http_request_duration{status:200}': ['p(95)<1000'], 
+                // the {status:200} is a tag to that address which returns a 200. 
+
+        'http_request_duration{status:201}': ['p(95)<1000'] 
+                // the {status:200} is a tag to that address which returns a 201. 
     }
 
 ```
@@ -29,9 +42,10 @@ we can set it to flase and check if the Object is false or not:
 ```
    check(res,{
         'Status is 200': (r) => r.status === 200,
-
             // now, if we wanted to check the page for a certain Text, we can also use check and assert that text.
             // simply we will equal the 'r.body.includes' to include that desired text. 
+
+
         'This page is start page': (r) => r.body.includes('Collection of simple web-pages suitable for load testing.')
             // now this will check the K6.io page for this text.
     })
@@ -64,12 +78,12 @@ export function setup(){
     console.log('-- setup stage --')
     sleep(5)
 
-    // here we wanted to show that K6 will take 'data' and put it in the default function (vu stage) as an argument.
-    // that is why we see that in the results as: 
+        // here we wanted to show that K6 will take 'data' and put it in the default function (vu stage) as an argument.
+        // that is why we see that in the results as: 
 
-            // INFO[0009] -- VU stage --                                source=console
-            // INFO[0010] {"foo":"bar"}  
-    
+                // INFO[0009] -- VU stage --                                source=console
+                // INFO[0010] {"foo":"bar"}  
+        
     const data = {foo: 'bar'}
     return data;
 }
@@ -115,9 +129,12 @@ And we can also use groups as for distinguishing the results for Thresholds:
 ```
     thresholds: {
         http_req_duration: ['p(95)<250'],
-        'group_duration{group:::Main page}': ['p(95)<200'], // this is a threshold for the group. each group name is prefixed by a ':'
-        // so that is why we added two extra ':' after group tag inside {}.
-        // {group:::Main page}
+        'group_duration{group:::Main page}': ['p(95)<200'], 
+        
+                // this is a threshold for the group. each group name is prefixed by a ':'
+                // so that is why we added two extra ':' after group tag inside {}.
+                // {group:::Main page}
+
         'group_duration{group:::Main page::Assests}': ['p(95)<200'],
     }
 ```
@@ -141,7 +158,7 @@ now the only thing is to first add this:
 on the base URL of the address and then use the following command in termianl to set the BASE URL:
 
 ```
-> k6 run -e BASE_URL=https://test.k6.io {name_of_the_file}.js
+> k6 run -e BASE_URL=https://test.k6.io {FILE_NAME}.js
 ```
 
 ------
