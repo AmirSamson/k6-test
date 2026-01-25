@@ -1,5 +1,6 @@
 # k6-learn
 this repository is for tests that I have wrote in JavaScript format, using k6.
+Read the followings for clues on the Methods and functions used in this Repo:
 
 ------
 
@@ -10,19 +11,22 @@ sleep(1) ==> this means that each request/iteration will wait for 1 second, afte
 
 ### Tags:
 Tags are really useful when it comes to distinguishing the results from each other. i.e. thresholds can be tagged so that we see different results for each:
+```
     thresholds:{
         http_request_duration: ['p(95)<1000'],
         'http_request_duration{status:200}': ['p(95)<1000'], // the {status:200} is a tag to that address which returns a 200. 
         'http_request_duration{status:201}': ['p(95)<1000'] // the {status:200} is a tag to that address which returns a 201. 
     }
 
-----------
+```
+------
 
 ### Checks:
 The Check function will have a Value (which here is 'true') and an Object which is set to the Value we gave it. 
 so here the Value is 'true' and the Object = 'value' is expected to be true.    i.e. (value) => value === true
 we can set it to flase and check if the Object is false or not:
 
+```
    check(res,{
         'Status is 200': (r) => r.status === 200,
 
@@ -31,7 +35,7 @@ we can set it to flase and check if the Object is false or not:
         'This page is start page': (r) => r.body.includes('Collection of simple web-pages suitable for load testing.')
             // now this will check the K6.io page for this text.
     })
-.
+```
 
 ------
 
@@ -52,6 +56,8 @@ In the Setup stage some advanced http calls is used or API calls. we are waiting
 
 ### Groups (for related URLs):
 The whole concept of groups is for using it for addresses which are related and we want them to be requested relatively at the same time. so we use Gropus in the default function:
+
+```
 export default function () {
 
     group('Main page', function () {  // main group and the following will be a sub-group
@@ -68,9 +74,11 @@ export default function () {
         http.get('https://test.k6.io/news.php');
     });
 }
+```
 
 And we can also use groups as for distinguishing the results for Thresholds:
 
+```
     thresholds: {
         http_req_duration: ['p(95)<250'],
         'group_duration{group:::Main page}': ['p(95)<200'], // this is a threshold for the group. each group name is prefixed by a ':'
@@ -78,7 +86,7 @@ And we can also use groups as for distinguishing the results for Thresholds:
         // {group:::Main page}
         'group_duration{group:::Main page::Assests}': ['p(95)<200'],
     }
-
+```
 -----
 
 ### Test Abortion:
@@ -86,8 +94,10 @@ if the URL is not responding, we need to have a way of aborting/terminating the 
 this is don through using 'exec' method from 'execution' lib from k6. in the setup funtion.
 
 will get an error in the logs: 
-"ERRO[0003] test aborted: The address for "home-page" is not responding. Aborting test..."
 
+```
+"ERRO[0003] test aborted: The address for "home-page" is not responding. Aborting test..."
+```
 ------
 
 ### Setting BASE URL:
@@ -96,7 +106,9 @@ now the only thing is to first add this:
     "__ENV.BASE_URL"
 on the base URL of the address and then use the following command in termianl to set the BASE URL:
 
+```
 > k6 run -e BASE_URL=https://test.k6.io {name_of_the_file}.js
+```
 
 ------
 
@@ -108,8 +120,13 @@ import {randomIntBetween} from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
 
 and in the export default function we use it as:
 
+```
 export default function () {
 
     http.get('URL')
     sleep(randomIntBetween(2,6));
 }
+```
+
+-------
+
