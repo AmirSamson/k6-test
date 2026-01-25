@@ -13,12 +13,16 @@ const credentials = {
 };
 
 export default function(){
-    http.post('https://test-api.k6.io/user/register/', 
+    
+    http.post(
+        'https://test-api.k6.io/user/register/', 
 
-    JSON.stringify(credentials), 
-    {
-        headers: {
-        'Content-Type':'application/json'
+        JSON.stringify(credentials), 
+        
+        {
+            headers: {
+                'Content-Type':'application/json'
+            }
         }
-    })
+    )
 }
