@@ -1,12 +1,15 @@
 # k6-test (JS)
-this repository is for tests that I have wrote in JavaScript format, using k6.
+This repository is for tests that I have wrote in JavaScript format, using k6.
 <br>
 Read the followings for clues on the Methods and functions used in this Repo:
 
 ------
 
 ### Sleep:
-sleep(1) ==> this means that each request/iteration will wait for 1 second, after been executed. to mimic real user's behavior
+
+`sleep(1)` 
+
+This means that each request/iteration will wait for 1 second, after been executed. to mimic real user's behavior
 
 ------
 
