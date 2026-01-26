@@ -33,26 +33,27 @@ This project organizes k6 performance tests by **test responsibility and type** 
 
 ```text
 .
-├── API/
-│   ├── POST.api.js
-│   ├── Post-users.api.js
-│   └── API-Bearer-Token.api.js
-│
-├── Http/
-│   ├── http-get.js
-│   ├── http-Custom-Metric.js
-│   ├── http-Tags.js
-│   └── http-Assertion.js
-│
-├── Scenario/
-│   ├── smoke/
-│   │   └── login.smoke.js
-│   ├── load/
-│   │   └── checkout.load.js
-│   ├── spike/
-│   │   └── search.spike.js
-│   └── stress/
-│       └── payments.stress.js
+├── Test/
+│    └── API/
+│   │    └── POST.api.js
+│   │    └── Post-users.api.js
+│   │    └── API-Bearer-Token.api.js
+│   │
+├── └── Http/
+│   │    └── http-get.js
+│   │    └── http-Custom-Metric.js
+│   │    └── http-Tags.js
+│   │    └── http-Assertion.js
+│   │
+├── └── Scenario/
+│   │    └── smoke/
+│   │        └── login.smoke.js
+│   │    └── load/
+│   │        └── checkout.load.js
+│   │    └── spike/
+│   │       └── search.spike.js
+│   │    └── stress/
+│   │        └── payments.stress.js
 │
 ├── Models/
 │   └── user.js
