@@ -1,5 +1,5 @@
 import http from 'k6/http';
-import User from '../User/user';
+import User from '../../Models/user';
 
 /*
 Also when we don't know the response of a URL we can use the following flag in the Terminal to access the response: 
@@ -18,7 +18,7 @@ Also when we don't know the response of a URL we can use the following flag in t
 export default function(){
     
     const credentials = new User
-    
+
     http.post(
         'https://test-api.k6.io/user/register/', 
 
