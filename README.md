@@ -3,6 +3,80 @@ This repository is for tests that I have wrote in JavaScript format, using k6.
 <br>
 Read the followings for clues on the Methods and functions used in this Repo:
 
+## Project Structure
+
+This project organizes k6 performance tests by **test responsibility and type** to keep the codebase clean, reusable, and easy to scale.
+
+### Folder Overview
+
+* **/Test/API/**
+  Contains tests focused on **API-level behavior**, such as business endpoints, authentication flows, and data validation scenarios.
+
+* **Test/Http/**
+  Includes tests that validate **HTTP calls and methods** (GET, POST, PUT, DELETE, etc.), focusing on request/response behavior rather than full scenarios.
+
+* **Test/Scenario/**
+  Holds complete **performance scenarios**, including:
+
+  * Smoke tests
+  * Load tests
+  * Spike tests
+  * Stress / Soak tests
+    Each scenario type is grouped in its own subfolder.
+
+* **Models/**
+  Contains reusable **data models** (e.g. `user.js`) used across tests to standardize request payloads and test data.
+
+---
+
+### Project Map
+
+```text
+.
+├── API/
+│   ├── POST.api.js
+│   ├── Post-users.api.js
+│   └── API-Bearer-Token.api.js
+│
+├── Http/
+│   ├── http-get.js
+│   ├── http-Custom-Metric.js
+│   ├── http-Tags.js
+│   └── http-Assertion.js
+│
+├── Scenario/
+│   ├── smoke/
+│   │   └── login.smoke.js
+│   ├── load/
+│   │   └── checkout.load.js
+│   ├── spike/
+│   │   └── search.spike.js
+│   └── stress/
+│       └── payments.stress.js
+│
+├── Models/
+│   └── user.js
+│
+└── README.md
+```
+
+---
+
+### Running Tests
+
+Each test is executed by pointing `k6 run` to the desired file:
+
+```bash
+k6 run Scenario/smoke/login.smoke.js
+k6 run API/users.api.js
+k6 run Http/get.http.js
+```
+
+---
+
+## INSTRUCTIONs for methods:
+Below is the descriptions and instructions for Methods I used in this project.
+
 ------
 
 ### Sleep:
