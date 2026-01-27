@@ -20,11 +20,13 @@ export default function(){
     const crocodileIds = crocodiles.map(crocodile => crocodile.id) // this will return the number of crocodile IDs in res.json()
     // it will help us to use thos IDs in generating random IDs for the URL to get different results.
     const crocodileId = randomItem(crocodileIds)
-    
+    const crocodileName = crocodiles[crocodileId].name
+
     res = http.get(`https://test-api.k6.io/public/crocodiles/${crocodileId}/`)
 
     check(res, {
         'checked status is 200': (r) => r.status===200,
-        'Crocodile name is correct': (r) => r.json().id === crocodileId
+        'Crocodile ID is correct': (r) => r.json().id === crocodileId,
+        'Crocodile name is correct': (r) => r.json().name = crocodileName
     })
 }
