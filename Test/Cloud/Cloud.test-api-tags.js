@@ -3,6 +3,37 @@ import { randomString } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
 import { randomIntBetween } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
 import { check, sleep } from 'k6';
 
+/* README:
+The idea here is that in the K6 Cloud report, when we have too many URLs to request to, we will encounter a Performance issue on the reports
+Since K6 cannot know if we were only inspecting some userIDs from creating them previously. So it raises an ERROR which states that 
+there is too many requests/URLs or Checks.
+
+To fix this, we need to add tags for a group of URLs that do check the userIds. 
+in the request it self we can add a new Object with the Tag property in it. and name the URLs so that K6 can understand it. 
+
+here is how: 
+
+```
+
+    const newCrocodileId = res.json().id;
+
+    res = http.get(
+        `https://test-api.k6.io/my/crocodiles/${newCrocodileId}/`,
+        {
+            headers: {
+                Authorization: 'Bearer ' + accessToken
+            },
+            tags: {
+                name: 'getCrocodileURL'
+            }
+        }
+    );
+```
+
+Now K6 knows that this group of URLs are related together and will not raise a Performance ERROR. 
+
+*/
+
 export const options = {
     stages: [
         {
