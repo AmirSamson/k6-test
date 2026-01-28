@@ -285,3 +285,10 @@ there is also a shorter version for the flags as follows:
 ```
     > K6 run #FILE_NAME -v 1 -d 10s -i 1
 ```
+
+### JSON Report for Results
+K6 offers a JSON report for each test run, using the following command in the Terminal:
+
+```
+    > k6 run #FILE_NAME --summary-export=K6-results-summary.json
+```
