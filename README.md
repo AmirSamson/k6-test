@@ -260,3 +260,28 @@ export default function () {
 
 -------
 
+### CLI Options on K6:
+Imagine we have set our Options and have 10 vus, with a long duration. However we only want to do a smoke test on the same test file. 
+There is a way for doing this and its by using command Flags in the Terminal when running the test script. 
+ 
+We want to reduce the Vus in the test without touching the file itself. we do it as follows:
+
+```
+    > K6 run #FILE_NAME --vus 1 
+
+```
+or for changing the duration as well: 
+
+```
+    > K6 run #FILE_NAME --vus 1 --duration 10s
+```
+or reducing the "Iterations" as well:
+
+```
+    > K6 run #FILE_NAME --vus 1 --iterations 1
+```
+
+there is also a shorter version for the flags as follows:
+```
+    > K6 run #FILE_NAME -v 1 -d 10s -i 1
+```
