@@ -286,6 +286,13 @@ there is also a shorter version for the flags as follows:
     > K6 run #FILE_NAME -v 1 -d 10s -i 1
 ```
 
+Also when we don't know the response of a URL we can use the following flag in the Terminal to access the response: 
+
+```
+    > K6 run --http-debug="full" {name of the test file}
+```
+-----
+
 ### JSON Report for Results
 K6 offers a JSON report for each test run, using the following command in the Terminal:
 
