@@ -5,6 +5,9 @@ import { randomItem } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
 /* README:
 In this file we are using the "RandomString" function in order to generate random strings for usernames.
 this is helpful when it comes to multiple iterations/requests. 
+
+Here we will be using ".map" method which allows us to go item by item in a parsed request and return something for us.
+here we would need the crocodile ids. so we use crocodiles.map() to return IDs inside crocodile endpoint.
 because using the 'Date.now()' method could only generate usernames for 1 request at a time, not for concurrent requests simultaneously:
 
         const crocodileIds = crocodiles.map(crocodile => crocodile.id)
